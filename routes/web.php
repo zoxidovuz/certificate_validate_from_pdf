@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CertificatesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::get('/', 'App\Http\Controllers\CertificatesController@list')->name('certificates.list');
+Route::get('certs/download/{certificate}', 'App\Http\Controllers\CertificatesController@downloadCertificate')
+    ->name('certificates.download');
+
+
+Route::middleware('auth')->group(function(){
+    Route::resource('certificate', CertificatesController::class);
 });
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__ . '/auth.php';
