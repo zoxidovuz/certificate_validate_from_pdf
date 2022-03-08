@@ -34,6 +34,9 @@ abstract class QueryFilter
         $this->builder = $builder;
 
         $fields = $this->fields();
+        if(empty($fields)){
+            $this->empty();
+        }
         foreach ($fields as $field => $value) {
             $method = lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $field))));
             if (method_exists($this, $method)) {

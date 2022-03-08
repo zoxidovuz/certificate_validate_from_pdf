@@ -119,6 +119,7 @@ class CertificatesController extends Controller
         // For frontend section
         $certifications = Certificate::orderBy('id', 'desc')
             ->filter($certificateFilter)->paginate(25);
+
         return view('certificates.list', compact('certifications'));
     }
 
