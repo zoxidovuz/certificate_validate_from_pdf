@@ -21,6 +21,9 @@ Route::get('certs/download/{certificate}', 'App\Http\Controllers\CertificatesCon
 
 
 Route::middleware('auth')->group(function(){
+    Route::get('profile', 'App\Http\Controllers\ProfileController@edit')->name('profile.edit');
+    Route::put('profile', 'App\Http\Controllers\ProfileController@update')->name('profile.update');
+
     Route::resource('certificate', CertificatesController::class);
 });
 
